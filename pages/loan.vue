@@ -64,6 +64,7 @@
                   <v-text-field
                     v-model="loanInfo.ApplicantIncome"
                     label="Income (Amount)"
+                    type="number"
                     required
                   ></v-text-field>
                 </v-col>
@@ -87,6 +88,7 @@
                   <v-text-field
                     v-model="loanInfo.CoapplicantIncome"
                     label="Guarantor Income (Amount)"
+                    type="number"
                     required
                   ></v-text-field>
                 </v-col>
@@ -108,8 +110,8 @@
                 >
                   <v-text-field
                     v-model="loanInfo.LoanAmount"
-                    :rules="nameRules"
                     label="Loan Amount"
+                    type="number"
                     required
                   ></v-text-field>
                 </v-col>
@@ -131,8 +133,8 @@
                 >
                   <v-text-field
                     v-model="loanInfo.Loan_Amount_Term"
-                    :rules="nameRules"
                     label="Loan Terms (Month)"
+                    type="number"
                     required
                   ></v-text-field>
                 </v-col>
