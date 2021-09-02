@@ -480,6 +480,8 @@ export default {
   }
   .mainBack {
     padding: 10px 25px;
+    align-items: flex-start;
+    margin-top: 30px;
   }
 }
 </style>
