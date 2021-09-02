@@ -278,14 +278,14 @@ export default {
         loading: false,
         loanInfo: {
           id: 10,
-          First_name: 'Tosin',
-          Last_name: 'asdad',
-          Email: 'asdasa@as.com',
+          First_name: '',
+          Last_name: '',
+          Email: '',
           Dependents: '',
-          ApplicantIncome: '45000',
-          CoapplicantIncome: '30000',
-          LoanAmount: '10000',
-          Loan_Amount_Term: '360',
+          ApplicantIncome: '',
+          CoapplicantIncome: '',
+          LoanAmount: '',
+          Loan_Amount_Term: '',
           Credit_History: '',
           Married: '',
           Gender: '',
@@ -403,7 +403,6 @@ export default {
         this.loading = true;
         const response = await this.$axios.post('/apply', info)
         this.$toast.success('You just checked your loan eligibility')
-        console.log(response);
         if (response.data.eligible_for_loan) {
           this.dialog = true;
         } else {
