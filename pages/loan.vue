@@ -413,7 +413,7 @@ export default {
     } catch(error) {
         this.loanInfo = ''
         this.loading = false
-        this.$toast.success('There was a problem checking your loan availability, Try Again')
+        this.$toast.success('There was a problem checking your loan availability, Check the input fields and try again.')
     }
     },
     logout() {
