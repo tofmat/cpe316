@@ -278,14 +278,14 @@ export default {
         loading: false,
         loanInfo: {
           id: 10,
-          First_name: '',
-          Last_name: '',
-          Email: '',
+          First_name: 'Tosin',
+          Last_name: 'asdad',
+          Email: 'asdasa@as.com',
           Dependents: '',
-          ApplicantIncome: '',
-          CoapplicantIncome: '',
-          LoanAmount: '',
-          Loan_Amount_Term: '',
+          ApplicantIncome: '45000',
+          CoapplicantIncome: '30000',
+          LoanAmount: '10000',
+          Loan_Amount_Term: '360',
           Credit_History: '',
           Married: '',
           Gender: '',
@@ -402,18 +402,19 @@ export default {
       try {
         this.loading = true;
         const response = await this.$axios.post('/apply', info)
-        this.$toast.success('You just checked your loan avaiability')
-        if (response.eligible_for_loan) {
+        this.$toast.success('You just checked your loan eligibility')
+        console.log(response);
+        if (response.data.eligible_for_loan) {
           this.dialog = true;
         } else {
           this.otherDialog = true;
         }
-        this.loanInfo = ''
+        // this.loanInfo = ''
         this.loading = false;
     } catch(error) {
-        this.loanInfo = ''
+        // this.loanInfo = ''
         this.loading = false
-        this.$toast.success('There was a problem checking your loan availability, Check the input fields and try again.')
+        this.$toast.success('There was a problem checking your loan eligibility, Check the input fields and try again.')
     }
     },
     logout() {
