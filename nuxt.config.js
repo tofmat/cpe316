@@ -21,12 +21,14 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
+      {rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Poppins'},
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    './assets/index.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -44,13 +46,15 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/auth-next',
+    '@nuxtjs/toast'
   ],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
-    customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
+      // dark: true,
       themes: {
         dark: {
           primary: colors.blue.darken2,
@@ -65,7 +69,51 @@ export default {
     }
   },
 
+  toast: {
+    position: 'top-right',
+    duration: 3000,
+    keepOnHover: true,
+    register: [ // Register custom toasts
+      {
+        name: 'my-error',
+        message: 'Oops...Something went wrong',
+        options: {
+          type: 'error'
+        }
+      },
+    ]
+  },
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+  
+  axios:{
+    baseURL: 'https://loanway.herokuapp.com/api'
+  },
+
+  auth: {
+    strategies: {
+      local: {
+        token: {
+          property: 'token',
+          global: true,
+          // required: true,
+          type: 'Token'
+        },
+        user: {
+          property: false,
+          autoFetch: false
+        },
+        endpoints: {
+          login: { url: '/auth/login', method: 'post', propertyName: 'token' },
+          logout: { url: '/v1/auth/logout', method: 'get' },
+          user: { url: '/user', method: 'get', propertyName: false }
+        },
+        // tokenRequired: true,
+        // globalToken: true,
+        // autoFetchUser: true
+      }
+    }
   }
 }

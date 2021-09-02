@@ -1,77 +1,128 @@
 <template>
-  <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      <v-card class="logo py-4 d-flex justify-center">
-        <NuxtLogo />
-        <VuetifyLogo />
-      </v-card>
-      <v-card>
-        <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
-        </v-card-title>
-        <v-card-text>
-          <p>Vuetify is a progressive Material Design component framework for Vue.js. It was designed to empower developers to create amazing applications.</p>
-          <p>
-            For more information on Vuetify, check out the <a
-              href="https://vuetifyjs.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              documentation
-            </a>.
-          </p>
-          <p>
-            If you have questions, please join the official <a
-              href="https://chat.vuetifyjs.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="chat"
-            >
-              discord
-            </a>.
-          </p>
-          <p>
-            Find a bug? Report it on the github <a
-              href="https://github.com/vuetifyjs/vuetify/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="contribute"
-            >
-              issue board
-            </a>.
-          </p>
-          <p>Thank you for developing with Vuetify and I look forward to bringing more exciting features in the future.</p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
+  <div class="big">
+    <div class="header">
+      <div class="flex spaceBetween alignCenter">
+        <img src="../assets/logocolored.png" alt="logo">
+        <div>
+          <v-btn class="signBtn">Sign up</v-btn>
+        </div>
+      </div>
+    </div>
+    <div class="mainBack flex justifyCenter alignCenter">
+        <div class="loginPanel">
+          <div>
+            <h3>Login to your account</h3>
+            <form @submit.prevent="loginUser(userInfo)">
+              <v-text-field
+                v-model="userInfo.username"
+                label="Username"
+                placeholder="Enter your username"
+                hide-details="auto"
+              ></v-text-field>
+              <v-text-field
+                v-model="userInfo.password"
+                label="Password"
+                type="password"
+                placeholder="Enter your password"
+                hide-details="auto"
+              ></v-text-field>
+              <v-btn class="loginBtn logBtn" type="submit" :loading = loading>Login</v-btn>
+            </form>
           </div>
-          <hr class="my-3">
-          <a
-            href="https://nuxtjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt Documentation
-          </a>
-          <br>
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt GitHub
-          </a>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn
-            color="primary"
-            nuxt
-            to="/inspire"
-          >
-            Continue
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-col>
-  </v-row>
+        </div>
+      </div>
+  </div>
 </template>
+
+<script>
+export default {
+  layout: 'default',
+  data() {
+    return {
+      loading: false,
+      userInfo : {
+        username: 'admin',
+        password: 'admin'
+      }
+    }
+  },
+  methods: {
+    async loginUser(loginInfo){
+      this.errors = ""
+      try {
+          this.loading = true;
+          this.$toast.show('Logging in...')
+          const response = await this.$auth.loginWith('local', {
+            data: loginInfo
+          })
+          localStorage.token = response.data.token;
+          this.$router.push('/loan')
+          this.$toast.success('You are logged in')
+          this.loading = false;
+          return response;
+      } catch (error){
+          // this.errors = error.response.data.error
+          this.loading = false;
+          this.$toast.info('There was a problem logging in, check your credentials');
+      }
+    }
+  }
+}
+
+</script>
+<style scoped>
+.big {
+  background-color: #2F2E41;
+}
+.header {
+  padding: 30px;
+  padding-bottom: 0 !important;
+}
+.flex {
+  display: flex;
+}
+.spaceBetween {
+  justify-content: space-between;
+}
+.justifyCenter {
+  justify-content: center;
+}
+.alignCenter {
+  align-items: center;
+}
+.signBtn {
+  background-color: #FF3926 !important;
+  color: white !important;
+  border-radius: 10px;
+}
+.mainBack {
+  min-height: calc(100vh - 50px);
+  background: url('../assets/mainBack.png');
+  padding: 10px 100px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.loginPanel {
+  background: rgba(255, 255, 255, 0.884);
+  width: 400px;
+  padding: 100px 20px;
+  height: fit-content;
+  border-radius: 20px;
+}
+.logBtn {
+  margin-top: 30px;
+  background-color: black !important;
+  color:  white !important;
+}
+@media (max-width: 600px) {
+  .header {
+    padding: 10px !important;
+  }
+  .loginPanel {
+    width: 90% !important;
+  }
+  .mainBack {
+    padding: 10px 25px;
+  }
+}
+</style>
