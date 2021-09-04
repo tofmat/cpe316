@@ -40,17 +40,6 @@
                   md="6"
                 >
                   <v-text-field
-                    v-model="loanInfo.Email"
-                    label="Email"
-                    type="email"
-                    required
-                  ></v-text-field>
-                </v-col>
-                <v-col
-                  cols="12"
-                  md="6"
-                >
-                  <v-text-field
                     v-model="loanInfo.id"
                     :disabled="true"
                     label="Loan ID"
@@ -280,7 +269,6 @@ export default {
           id: 10,
           First_name: '',
           Last_name: '',
-          Email: '',
           Dependents: '',
           ApplicantIncome: '',
           CoapplicantIncome: '',
