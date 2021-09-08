@@ -4,7 +4,7 @@
       <div class="flex spaceBetween alignCenter">
         <img src="../assets/logocolored.png" alt="logo">
         <div>
-          <v-btn class="signBtn">Sign up</v-btn>
+          <v-btn class="signBtn">Login</v-btn>
         </div>
       </div>
     </div>

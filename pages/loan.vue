@@ -12,6 +12,7 @@
       <div class="loginPanel">
         <div>
           <h3>Fill form below to view loan eligibility</h3>
+          <p>Check all your applications <span class="toAll"><Nuxt-Link to="/allloans">here</Nuxt-Link></span></p>
           <form @submit.prevent="submitLoan(loanInfo)">
             <v-container>
               <v-row>
@@ -122,7 +123,7 @@
                 >
                   <v-text-field
                     v-model="loanInfo.Loan_Amount_Term"
-                    label="Loan Terms (Month)"
+                    label="Loan Terms (Weeks)"
                     type="number"
                     required
                   ></v-text-field>
