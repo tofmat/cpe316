@@ -41,8 +41,8 @@ export default {
     return {
       loading: false,
       userInfo : {
-        username: 'admin',
-        password: 'admin'
+        username: '',
+        password: ''
       }
     }
   },
